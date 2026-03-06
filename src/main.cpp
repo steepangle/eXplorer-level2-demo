@@ -37,6 +37,61 @@ void beep(int pitchDelay, int duration)
   }
 }
 
+void blink()
+{
+  for (int i = 0; i < 3; i++)
+  {
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(8, HIGH);
+    delay(500);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, LOW);
+    delay(500);
+  }
+}
+
+void spkr()
+{
+  beep(4200, 20);
+  delay(50);
+
+  beep(4200, 20);
+  delay(50);
+
+  for (int i = 0; i < 1000; i++)
+  {
+    digitalWrite(PIN_SPKR, random(0, 2));
+    delayMicroseconds(60);
+  }
+  digitalWrite(PIN_SPKR, LOW);
+}
+
+void rgb()
+{
+  leds[0] = CRGB::Red;
+  leds[1] = CRGB::BlueViolet;
+  FastLED.show();
+  delay(500);
+  leds[0] = CRGB::Green;
+  leds[1] = CRGB::Turquoise;
+  FastLED.show();
+  delay(500);
+  leds[0] = CRGB::Blue;
+  leds[1] = CRGB::Orange;
+  FastLED.show();
+  delay(500);
+  leds[0] = CRGB::Green;
+  leds[1] = CRGB::Purple;
+  FastLED.show();
+  delay(500);
+  leds[0] = CRGB::Black;
+  leds[1] = CRGB::Black;
+  FastLED.show();
+  delay(500);
+}
+
 void setup()
 {
   Serial.begin(9600);
@@ -65,81 +120,24 @@ void loop()
   digitalWrite(7, LOW);
   digitalWrite(8, HIGH);
 
-  char choice = 'l';
-
   for (int i = 0; i < 100; i++)
   {
     if (digitalRead(4))
     {
-      choice = 's';
       Serial.println("s | loudspeaker activated");
+      spkr();
       break;
     }
     else if (!digitalRead(2))
     {
-      choice = 'r';
       Serial.println("r | rgb LEDs activated");
+      rgb();
       break;
     }
-    else if (i == 99)
+    else if (digitalRead(4) && !digitalRead(2))
     {
-      Serial.println("a | timeout... auto blink initiated");
+      Serial.println("b | blink activated");
     }
     delay(30);
-  }
-
-  if (choice == 'l')
-  {
-    for (int i = 0; i < 3; i++)
-    {
-      digitalWrite(6, LOW);
-      digitalWrite(7, LOW);
-      digitalWrite(8, HIGH);
-      delay(500);
-      digitalWrite(6, HIGH);
-      digitalWrite(7, HIGH);
-      digitalWrite(8, LOW);
-      delay(500);
-    }
-  }
-
-  if (choice == 's')
-  {
-    beep(4200, 20);
-    delay(50);
-
-    beep(4200, 20);
-    delay(50);
-
-    for (int i = 0; i < 1000; i++)
-    {
-      digitalWrite(PIN_SPKR, random(0, 2));
-      delayMicroseconds(60);
-    }
-    digitalWrite(PIN_SPKR, LOW);
-  }
-
-  if (choice == 'r')
-  {
-    leds[0] = CRGB::Red;
-    leds[1] = CRGB::BlueViolet;
-    FastLED.show();
-    delay(500);
-    leds[0] = CRGB::Green;
-    leds[1] = CRGB::Turquoise;
-    FastLED.show();
-    delay(500);
-    leds[0] = CRGB::Blue;
-    leds[1] = CRGB::Orange;
-    FastLED.show();
-    delay(500);
-    leds[0] = CRGB::Green;
-    leds[1] = CRGB::Purple;
-    FastLED.show();
-    delay(500);
-    leds[0] = CRGB::Black;
-    leds[1] = CRGB::Black;
-    FastLED.show();
-    delay(500);
   }
 }
