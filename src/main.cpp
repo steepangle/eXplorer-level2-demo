@@ -38,7 +38,7 @@ void beep(int pitchDelay, int duration)
     digitalWrite(PIN_SPKR, LOW);
     delayMicroseconds(pitchDelay);
   }
-  blockIn = false;
+  rest();
 }
 
 void blink()
@@ -54,7 +54,7 @@ void blink()
     digitalWrite(8, LOW);
     delay(500);
   }
-  blockIn = false;
+  rest();
 }
 
 void spkr()
@@ -72,7 +72,7 @@ void spkr()
   }
   digitalWrite(PIN_SPKR, LOW);
 
-  blockIn = false;
+  rest();
 }
 
 void rgb()
@@ -98,11 +98,12 @@ void rgb()
   FastLED.show();
   delay(500);
 
-  blockIn = false;
+  rest();
 }
 
 void rest()
 {
+  blockIn = false;
   Serial.println("X | awaiting command");
 
   digitalWrite(6, HIGH);
@@ -132,7 +133,6 @@ void setup()
 
 void loop()
 {
-  restCounter++;
   if (!blockIn)
   {
     if (digitalRead(PIN_S1))
@@ -152,9 +152,6 @@ void loop()
       blockIn = true;
       Serial.println("s | loudspeaker activated");
       spkr();
-    } else if (restCounter == 100){
-      rest();
     }
-    delay(30);
   }
 }
