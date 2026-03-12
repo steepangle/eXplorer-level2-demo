@@ -29,6 +29,16 @@ CRGB leds[NUM_RGB_LEDS];
 bool blockIn = false;
 int restCounter = 0;
 
+void rest()
+{
+  blockIn = false;
+  Serial.println("X | awaiting command");
+
+  digitalWrite(6, HIGH);
+  digitalWrite(7, LOW);
+  digitalWrite(8, HIGH);
+}
+
 void beep(int pitchDelay, int duration)
 {
   for (int i = 0; i < duration; i++)
@@ -101,16 +111,6 @@ void rgb()
   rest();
 }
 
-void rest()
-{
-  blockIn = false;
-  Serial.println("X | awaiting command");
-
-  digitalWrite(6, HIGH);
-  digitalWrite(7, LOW);
-  digitalWrite(8, HIGH);
-}
-
 void setup()
 {
   Serial.begin(9600);
@@ -135,7 +135,12 @@ void loop()
 {
   if (!blockIn)
   {
-    if (digitalRead(PIN_S1))
+    if (digitalRead(4) && !digitalRead(2)) //both pressed
+    {
+      blockIn = true;
+      Serial.println("s | loudspeaker activated");
+      spkr();
+    } else if (digitalRead(PIN_S1))
     {
       blockIn = true;
       Serial.println("b | blinking headlights");
@@ -146,12 +151,6 @@ void loop()
       blockIn = true;
       Serial.println("r | rgb LEDs activated");
       rgb();
-    }
-    else if (digitalRead(4) && !digitalRead(2)) //both pressed
-    {
-      blockIn = true;
-      Serial.println("s | loudspeaker activated");
-      spkr();
     }
   }
 }
