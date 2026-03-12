@@ -12,8 +12,8 @@
 
 #define PIN_M1_F 3
 #define PIN_M1_R 11
-#define PIN_M2_F 9
-#define PIN_M2_R 10
+#define PIN_M2_F 10
+#define PIN_M2_R 9
 
 #define PIN_SPKR 5
 #define PIN_S1 4
@@ -111,6 +111,48 @@ void rgb()
   rest();
 }
 
+void go(char motor, char direction, int duration) {
+  if (motor == 'R')
+  {
+    if (direction == 'F')
+    {
+      digitalWrite(PIN_M1_F, HIGH);
+      delay(duration);
+      digitalWrite(PIN_M1_F, LOW);
+    } else if (direction == 'B')
+    {
+      digitalWrite(PIN_M1_R, HIGH);
+      delay(duration);
+      digitalWrite(PIN_M1_R, LOW);
+    }
+  } else if (motor == 'L')
+  {
+    if (direction == 'F')
+    {
+      digitalWrite(PIN_M2_F, HIGH);
+      delay(duration);
+      digitalWrite(PIN_M2_F, LOW);
+    } else if (direction == 'B')
+    {
+      digitalWrite(PIN_M2_R, HIGH);
+      delay(duration);
+      digitalWrite(PIN_M2_R, LOW);
+    }
+  }
+}
+
+void brake(int duration) {
+  digitalWrite(PIN_M1_F, HIGH);
+  digitalWrite(PIN_M1_R, HIGH);
+  digitalWrite(PIN_M2_F, HIGH);
+  digitalWrite(PIN_M2_R, HIGH);
+  delay(duration);
+  digitalWrite(PIN_M1_F, LOW);
+  digitalWrite(PIN_M1_R, LOW);
+  digitalWrite(PIN_M2_F, LOW);
+  digitalWrite(PIN_M2_R, LOW);
+}
+
 void setup()
 {
   Serial.begin(9600);
@@ -153,4 +195,9 @@ void loop()
       rgb();
     }
   }
+/*
+  go('R', 'F', 5000);
+  go('L', 'F', 5000);
+  brake(5000);
+  */
 }

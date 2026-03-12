@@ -38,7 +38,7 @@
 |    2 | **`D0 RX`**  | X3 Bluetooth
 |    3 | **`D1 TX`**  | X3 Bluetooth
 |    4 | **`D2`**     | /S2
-|    5 | **`D3~`**    | Motor 1 FWD
+|    5 | **`D3~`**    | M1 CCW - Left FWD
 |    6 | **`D4`**     | S1
 |    7 | **`+5V`**    | -
 |    8 | **`GND`**    | -
@@ -48,9 +48,9 @@
 |   12 | **`D6~`**    | /LED Front
 |   13 | **`D7`**     | /LED Left
 |   14 | **`D8`**     | LED Right
-|   15 | **`D9~`**    | Motor 2 FWD
-|   16 | **`D10~`**   | Motor 2 REV
-|   17 | **`D11~`**   | Motor 1 REV
+|   15 | **`D9~`**    | M2 CW - Right REV
+|   16 | **`D10~`**   | M2 CCW - Right FWD
+|   17 | **`D11~`**   | M1 CCW - Left REV
 |   18 | **`D12~`**   | -
 |   19 | **`D13~`**   | RGB-LED DATA
 |   20 | **`+5V`**    | -
