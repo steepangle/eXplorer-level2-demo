@@ -192,12 +192,9 @@ void loop()
     {
       blockIn = true;
       Serial.println("r | rgb LEDs activated");
+      go('R', 'F', 5000);
+      go('L', 'F', 5000);
       rgb();
     }
   }
-/*
-  go('R', 'F', 5000);
-  go('L', 'F', 5000);
-  brake(5000);
-  */
 }
