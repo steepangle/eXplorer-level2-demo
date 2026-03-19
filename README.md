@@ -60,5 +60,5 @@
 |   24 | **`A1`**     | Sens Dist L
 |   25 | **`A2`**     | -
 |   26 | **`A3`**     | -
-|   27 | **`A4 SDA`** | Sens D
-|   28 | **`A5 SCL`** | Sens Dist C
+|   27 | **`A4 SDA`** | Sens Dist F
+|   28 | **`A5 SCL`** | Sens D
