@@ -121,11 +121,10 @@ void turnLft(int speedLo, int speedHi)
 
 void loop()
 {
-    /*
-    if(digitalRead(PIN_S1) == HIGH) {
+    if (digitalRead(PIN_S1) == HIGH) {
         run = true;
     }
-
+    /*
     int distFront = sensRefFront - readSensF() + 100;
     int distRight = sensRefRight - readSensR();
     int distLeft = sensRefLeft - readSensL();
@@ -147,27 +146,26 @@ void loop()
     Serial.println("Left: " + (String)speedL + " | Right: " + (String)speedR);
     */
 
-    //if (run)
-    //{
-
+    while (run)
+    {
         /*
         if (digitalRead(PIN_S1) == HIGH)
         {
             run = true;
         }
+        */
 
         if (digitalRead(PIN_S2) == LOW)
         {
             run = false;
         }
-            */
 
         int distFront = readSensF();
         int distRight = readSensR();
         // int distLeft = readSensL();
 
         int speedHi = 70;
-        int speedLo = 60;
+        int speedLo = 70;
 
         // int tripValue = 50;
         // int delta = distLeft - distRight + 60;
@@ -226,6 +224,7 @@ void loop()
             leds[1] = CRGB::Red;
             FastLED.show();
         }
+    }
 
     /*
     if (delta < (-tripValue))
@@ -252,9 +251,6 @@ void loop()
         Serial.println("straight");
     }
 
-    */
-
-    /*
     if (distLeft < distRight)
     {
         analogWrite(PIN_M1_F, speedLo);  //left
