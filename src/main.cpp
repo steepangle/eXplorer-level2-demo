@@ -116,7 +116,7 @@ void turnLft(int speedLo, int speedHi)
     analogWrite(PIN_M2_F, 0);       // right
     analogWrite(PIN_M1_R, 0);
     analogWrite(PIN_M2_R, speedLo);
-    delay(200);
+    delay(400);
 }
 
 void loop()
@@ -165,7 +165,7 @@ void loop()
         // int distLeft = readSensL();
 
         int speedHi = 70;
-        int speedLo = 70;
+        int speedLo = 40;
 
         // int tripValue = 50;
         // int delta = distLeft - distRight + 60;
@@ -177,8 +177,8 @@ void loop()
         Serial.println((String)distFront + "  |  " + (String)distRight);
 
         // dist right
-        int max = 600;
-        int min = 500;
+        int max = 650;
+        int min = 550;
 
         // dist
         int fmax = 700;
@@ -204,9 +204,9 @@ void loop()
         }
         if (distRight > max)
         {
-            analogWrite(PIN_M1_F, 0);       // left
+            analogWrite(PIN_M1_F, speedLo);       // left
             analogWrite(PIN_M2_F, speedHi); // right
-            analogWrite(PIN_M1_R, speedLo);
+            analogWrite(PIN_M1_R, 0);
             analogWrite(PIN_M2_R, 0);
             // Serial.println("left obs");
             leds[0] = CRGB::Yellow;
@@ -216,9 +216,9 @@ void loop()
         if (distRight < min)
         {
             analogWrite(PIN_M1_F, speedHi); // left
-            analogWrite(PIN_M2_F, 0);       // right
+            analogWrite(PIN_M2_F, speedLo);       // right
             analogWrite(PIN_M1_R, 0);
-            analogWrite(PIN_M2_R, speedLo);
+            analogWrite(PIN_M2_R, 0);
             // Serial.println("right obs");
             leds[0] = CRGB::Red;
             leds[1] = CRGB::Red;
