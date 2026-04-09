@@ -166,7 +166,7 @@ void loop()
         int distRight = readSensR();
         // int distLeft = readSensL();
 
-        int speedHi = 60;
+        int speedHi = 70;
         int speedLo = 60;
 
         // int tripValue = 50;
@@ -187,11 +187,11 @@ void loop()
 
         if (distFront < fmax)
         {
-            turnLft(speedLo, speedHi);
-
             leds[0] = CRGB::Blue;
             leds[1] = CRGB::Blue;
             FastLED.show();
+
+            turnLft(speedLo, speedHi);
         }
         if (distRight < max && distRight > min)
         {
